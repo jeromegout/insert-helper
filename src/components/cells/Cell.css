@@ -1,0 +1,45 @@
+.cell {
+  padding: 5px;
+  border: 1px solid #ababab;
+  position: relative;
+}
+
+.cell.highlighted {
+  cursor: pointer;
+}
+
+.cell.highlighted path {
+  fill: #ed641f;
+}
+
+.cell.winner.one {
+  background-color: var(--color-winner1);
+}
+
+.cell.winner.two {
+  background-color: var(--color-winner2);
+}
+
+.player::after {
+  content: "";
+  position: absolute;
+  border-width: 7px;
+  border-style: solid;
+  border-radius: 50%;
+  left: 5px;
+  right: 5px;
+  top: 5px;
+  bottom: 5px;
+}
+
+/* Background direction are less visible on occupied cells */
+.player path {
+  opacity: 0.2;
+}
+
+.player.one::after {
+  border-color: var(--color-player1);
+}
+.player.two::after {
+  border-color: var(--color-player2);
+}

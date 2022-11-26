@@ -1,0 +1,7 @@
+.move-one {
+  color: var(--color-player1);
+}
+
+.move-two {
+  color: var(--color-player2);
+}
