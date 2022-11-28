@@ -4,7 +4,7 @@ import Cell from "./cells/Cell";
 import { Cell as CellType, CellKind, RingType } from "../types/Cell";
 import Move from "../types/Move";
 import MoveList from "./MoveList";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const Board = () => {
@@ -12,6 +12,7 @@ const Board = () => {
   const [isPlayerOne, setIsPlayerOne] = useState(true);
   const [gameOver, setGameOver] = useState(false);
   const { slug } = useParams();
+  const navigate = useNavigate();
   const [moves, setMoves] = useLocalStorage<Move[]>([], `moves-${slug}`);
 
   useEffect(() => {
@@ -44,6 +45,10 @@ const Board = () => {
       setIsPlayerOne((prev) => !prev);
     }
   }, [moves]);
+
+  const goBack = () => {
+    navigate("/");
+  };
 
   const getHorizontalNeighborsIndices = (index: number): number[] => {
     const first = index - (index % 6);
@@ -290,7 +295,9 @@ const Board = () => {
           gap: "20px",
         }}
       >
-        <h1> INSERT</h1>
+        <h1 onClick={goBack} style={{ cursor: "pointer" }}>
+          INSERT
+        </h1>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)" }}>
           {cells.map((c, i) => (
             <Cell key={i} cell={c} size="50px" onCellClicked={() => handleCellClicked(i)} />

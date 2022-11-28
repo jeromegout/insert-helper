@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { faRotateRight } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "../hooks/useLocalStorage";
+import Game from "../types/Game";
 
 const BoardInitializer = () => {
   const [TL, setTL] = useState<BoardPart>(new BoardPart("C"));
@@ -12,6 +14,7 @@ const BoardInitializer = () => {
   const [BL, setBL] = useState<BoardPart>(new BoardPart("S"));
   const [BR, setBR] = useState<BoardPart>(new BoardPart("Y"));
   const navigate = useNavigate();
+  const [games, setGames] = useLocalStorage<Game[]>([], "games");
 
   const getKind = (s: string): PartKind => {
     if (!s || s.length === 0) return "C";
@@ -34,8 +37,33 @@ const BoardInitializer = () => {
 
   const selectorStyle = { display: "flex", alignItems: "center" };
 
+  const computeSlugIndex = (games: Game[]) => {
+    let index = 0;
+    games.forEach((g) => {
+      const parts = g.slug.split("-");
+      if (parts.length === 2) {
+        if (index < +parts[1]) index = +parts[1];
+      }
+    });
+    return ++index;
+  };
+
+  const computeSlug = () => {
+    let slug = `${TL.toString()}${TR.toString()}${BL.toString()}${BR.toString()}`;
+    const existingSameSlug = games.filter((game) => game.slug.startsWith(slug));
+    if (existingSameSlug.length > 0) {
+      slug += `-${computeSlugIndex(existingSameSlug)}`;
+    }
+    return slug;
+  };
+
   const handleValidate = () => {
-    navigate(`/game/${TL.toString()}${TR.toString()}${BL.toString()}${BR.toString()}`);
+    const slug = computeSlug();
+    games.unshift(new Game(slug));
+    setGames([...games]);
+    setTimeout(() => {
+      navigate(`/games/${slug}`);
+    }, 100);
   };
 
   return (
