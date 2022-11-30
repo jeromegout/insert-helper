@@ -27,7 +27,7 @@ const Games = () => {
   };
 
   const actions = (game: Game) => (
-    <div className="actions" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+    <div className="actions" style={{ display: "flex", gap: "20px", alignItems: "center", justifyContent: "flex-end" }}>
       <FontAwesomeIcon style={{ height: "20px" }} onClick={(e) => playGame(game)} icon={faCirclePlay} />
       <FontAwesomeIcon style={{ height: "20px" }} icon={faTrash} onClick={(e) => deleteGame(game)} />
     </div>
