@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { DateTime } from "luxon";
-import { SortData } from "react-simple-table2/dist/types";
+import Modal from "./Modal/Modal";
 
 const Games = () => {
   const [games, setGames] = useLocalStorage<Game[]>([], "games");
@@ -29,7 +29,15 @@ const Games = () => {
   const actions = (game: Game) => (
     <div className="actions" style={{ display: "flex", gap: "20px", alignItems: "center", justifyContent: "flex-end" }}>
       <FontAwesomeIcon style={{ height: "20px" }} onClick={(e) => playGame(game)} icon={faCirclePlay} />
-      <FontAwesomeIcon style={{ height: "20px" }} icon={faTrash} onClick={(e) => deleteGame(game)} />
+      <Modal
+        title="Delete"
+        trigger={<FontAwesomeIcon style={{ height: "20px" }} icon={faTrash} />}
+        onOk={() => {
+          deleteGame(game);
+        }}
+      >
+        <h3>Do you really want to delete this game?</h3>
+      </Modal>
     </div>
   );
 
