@@ -45,7 +45,7 @@ const BoardPart = ({ part, size = "30px" }: PartProps) => {
 
   const [content, setContent] = useState(getContent(part.kind));
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "5px" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "5px", border: "1px solid #555555" }}>
       {content.map((row, i) =>
         row
           .split("")

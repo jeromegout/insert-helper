@@ -18,8 +18,8 @@ const MoveList = ({ moves, onBackClick }: MoveListProps) => {
     <div>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "10px" }}>
         <h3>Moves</h3>
-        <button style={{ cursor: "pointer" }} disabled={moves.length === 0} onClick={onBackClick}>
-          <FontAwesomeIcon icon={faRotateLeft} />
+        <button className="btn-icon" disabled={moves.length === 0} onClick={onBackClick}>
+          <FontAwesomeIcon style={{ height: "20px" }} icon={faRotateLeft} />
         </button>
       </div>
       <div style={{ display: "flex", flexDirection: "column-reverse" }}>{items()}</div>

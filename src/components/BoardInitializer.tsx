@@ -35,7 +35,7 @@ const BoardInitializer = () => {
   const turnLeft = (current: number): number => (current + 90) % 360;
   const turnRight = (current: number): number => (current === 0 ? 270 : current - 90);
 
-  const selectorStyle = { display: "flex", alignItems: "center" };
+  const selectorStyle = { display: "flex", alignItems: "center", columnGap: "4px" };
 
   const computeSlugIndex = (games: Game[]) => {
     let index = 0;
@@ -68,9 +68,16 @@ const BoardInitializer = () => {
 
   return (
     <div
-      style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "20px" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "20px",
+        marginTop: "30px",
+      }}
     >
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", width: "100%" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "100%" }}>
         <div style={selectorStyle}>
           <select
             name="kind"
@@ -82,10 +89,10 @@ const BoardInitializer = () => {
             <option value="S">S</option>
             <option value="Y">Y</option>
           </select>
-          <button onClick={(e) => setTL((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setTL((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateLeft} />
           </button>
-          <button onClick={(e) => setTL((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setTL((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateRight} />
           </button>
         </div>
@@ -100,22 +107,22 @@ const BoardInitializer = () => {
             <option value="S">S</option>
             <option value="Y">Y</option>
           </select>
-          <button onClick={(e) => setTR((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setTR((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateLeft} />
           </button>
-          <button onClick={(e) => setTR((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setTR((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateRight} />
           </button>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5px" }}>
-        <UIPart part={TL} size="40px" />
-        <UIPart part={TR} size="40px" />
-        <UIPart part={BL} size="40px" />
-        <UIPart part={BR} size="40px" />
+        <UIPart part={TL} size="50px" />
+        <UIPart part={TR} size="50px" />
+        <UIPart part={BL} size="50px" />
+        <UIPart part={BR} size="50px" />
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-evenly", width: "100%" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-around", width: "100%" }}>
         <div style={selectorStyle}>
           <select
             name="kind"
@@ -127,10 +134,10 @@ const BoardInitializer = () => {
             <option value="S">S</option>
             <option value="Y">Y</option>
           </select>
-          <button onClick={(e) => setBL((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setBL((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateLeft} />
           </button>
-          <button onClick={(e) => setBL((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setBL((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateRight} />
           </button>
         </div>
@@ -145,15 +152,18 @@ const BoardInitializer = () => {
             <option value="S">S</option>
             <option value="Y">Y</option>
           </select>
-          <button onClick={(e) => setBR((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setBR((p) => new BoardPart(p.kind, turnLeft(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateLeft} />
           </button>
-          <button onClick={(e) => setBR((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
+          <button className="btn-icon" onClick={(e) => setBR((p) => new BoardPart(p.kind, turnRight(p.orientation)))}>
             <FontAwesomeIcon icon={faRotateRight} />
           </button>
         </div>
       </div>
-      <button style={{ marginTop: "20px" }} onClick={handleValidate}>
+      <button
+        style={{ marginTop: "20px", padding: "0.4rem 0.9rem", border: "none", borderRadius: "5px", cursor: "pointer" }}
+        onClick={handleValidate}
+      >
         Play with this board
       </button>
     </div>
