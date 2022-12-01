@@ -190,9 +190,7 @@ const Board = () => {
     return n.slice(min, max + 1);
   };
 
-  const checkWinner = (): boolean => {
-    if (moves.length === 0) return false;
-    const index = moves[moves.length - 1].position;
+  const isWinnerFromPosition = (index: number): boolean => {
     const winnerE = isWinnerDirection(index, "e");
     if (winnerE.length >= 5) {
       winnerE.forEach((i) => cells[i].setWinner());
@@ -212,6 +210,16 @@ const Board = () => {
     if (winnerV.length >= 5) {
       winnerV.forEach((i) => cells[i].setWinner());
       return true;
+    }
+    return false;
+  };
+
+  const checkWinner = (): boolean => {
+    if (moves.length === 0) return false;
+    const lastMove = moves[moves.length - 1];
+    if (isWinnerFromPosition(lastMove.position)) return true;
+    if (lastMove.inserts.length > 0) {
+      return isWinnerFromPosition(lastMove.inserts[0]) || isWinnerFromPosition(lastMove.inserts[1]);
     }
     return false;
   };

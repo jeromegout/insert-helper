@@ -31,6 +31,20 @@ body {
   min-height: 100vh;
 }
 
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+}
+
+h3 {
+  font-size: 1.17rem;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 div.ring {
   margin-left: 10px;
   width: 40px;
